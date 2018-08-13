@@ -1,0 +1,28 @@
+{
+  "name": "idyll-plugin-revision",
+  "version": "0.0.1",
+  "description": "Idyll plugin to display git revision information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChristianFrisson/idyll-plugin-revision.git"
+  },
+  "keywords": [
+    "idyll",
+    "git",
+    "revision"
+  ],
+  "author": "Christian Frisson",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "d3": "^4.0.0",
+    "d3-time-format": "^2.1.1",
+    "git-repo-info": "^2.0.0",
+    "idyll-ast": "^1.5.1",
+    "remote-origin-url": "^1.0.0"
+  }
+}
