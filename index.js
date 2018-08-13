@@ -12,7 +12,15 @@ module.exports = (ast) => {
     var info = getRepoInfo();
     let elements = [];
     elements.push(AST.createNode('span', { id: 'revisionTitle' }, ['Revision: ']));
+
     let commitUrl = '';
+    let commitText = '';
+    if (info.commitMessage !== null) {
+        commitText = info.commitMessage;
+    }
+    else if (info.abbreviatedSha !== null) {
+        commitText = info.abbreviatedSha;
+    }
     if (url === undefined) {
         url = '';
     }
@@ -24,10 +32,17 @@ module.exports = (ast) => {
         }
         commitUrl = url + '/commit/' + info.sha;
     }
-    elements.push(AST.createNode('a', { href: commitUrl, id: 'revisionMessage' }, [info.commitMessage]));
-    let author = info.committer.split('<')[0];
-    elements.push(AST.createNode('span', { id: 'revisionAuthor' }, [' by ' + author]));
-    elements.push(AST.createNode('span', { id: 'revisionDate' }, [' on ' + formatTime(parseTime(info.committerDate))]));
+    elements.push(AST.createNode('a', { href: commitUrl, id: 'revisionMessage' }, [commitText]));
+
+    if (info.committer !== null) {
+        let author = info.committer.split('<')[0];
+        elements.push(AST.createNode('span', { id: 'revisionAuthor' }, [' by ' + author]));
+    }
+
+    if (info.committerDate !== null) {
+        elements.push(AST.createNode('span', { id: 'revisionDate' }, [' on ' + formatTime(parseTime(info.committerDate))]));
+    }
+
     let revisionDiv = AST.createNode('div', { id: 'revisionDiv' }, elements);
     let ASTwithRevision = AST.modifyNodesByName(ast, 'Revision', (node) => {
         return revisionDiv;
