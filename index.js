@@ -25,7 +25,6 @@ module.exports = (ast) => {
         url = '';
     }
     else {
-        console.log('url', url);
         url = url.split('.git')[0];
         if (!url.includes("http") && url.includes("git@")) {
             url = "https://" + url.split('git@')[1].replace(':', '/');
