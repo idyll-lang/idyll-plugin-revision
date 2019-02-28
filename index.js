@@ -1,4 +1,5 @@
-const AST = require('idyll-ast');
+const { convertV1ToV2, convertV2ToV1 } = require('idyll-ast').converters;
+const AST = require('idyll-ast/v1');
 var getRepoInfo = require('git-repo-info');
 var d3 = require("d3");
 require("d3-time-format");
@@ -8,6 +9,7 @@ var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 var formatTime = d3.timeFormat("%B %e, %Y");
 
 module.exports = (ast) => {
+    ast = convertV2ToV1(ast);
     var url = remoteOriginUrl.sync();
     var info = getRepoInfo();
     let elements = [];
@@ -46,5 +48,5 @@ module.exports = (ast) => {
     let ASTwithRevision = AST.modifyNodesByName(ast, 'Revision', (node) => {
         return revisionDiv;
     });
-    return ASTwithRevision;
+    return convertV1ToV2(ASTwithRevision);
 };
