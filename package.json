@@ -22,7 +22,7 @@
     "d3": "^4.0.0",
     "d3-time-format": "^2.1.1",
     "git-repo-info": "^2.0.0",
-    "idyll-ast": "^1.5.1",
+    "idyll-ast": "^2.0.1-alpha.0",
     "remote-origin-url": "^1.0.0"
   }
 }
